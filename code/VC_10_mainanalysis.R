@@ -496,7 +496,7 @@ onlyProtVal44 = ggplot(aes(x = before, y = predSLOPEs44), data = cmbnData44) +
          shape = guide_legend(order = 2))
 onlyProtVal44
 
-# TableS13
+# TableS8
 samplesizesValidation = paste0(mytext, "\n\n", mytextext, "\n\n", mytextgen, 
                                "\n\n", mytext44)
 writeLines(samplesizesValidation, paste0(file,"patientsizeValidation", 

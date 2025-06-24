@@ -108,7 +108,7 @@ all_enrich555_new_res = as.data.frame(all_enrich555_new$result)
 all_enrich555_new_res = apply(all_enrich555_new_res, 2, as.character)
 file = "~/Data/slope-models-adpkd/data/results/"
 write.csv(x = all_enrich555_new_res,
-          file = paste0(file, "TableS3.csv"))
+          file = paste0(file, "DataS1.csv"))
 
 # | #  Parent Enriched GO:BP terms ----
 all_enrich555_new.res.sim = getrrvgo(all_enrich555_new)
@@ -116,7 +116,7 @@ sort(table(all_enrich555_new.res.sim$reducedTerms$parentTerm),decreasing = T)
 
 gotermsparent = unique(cbind.data.frame(all_enrich555_new.res.sim$reducedTerms$parent,
                                         all_enrich555_new.res.sim$reducedTerms$parentTerm))
-write.csv(x = gotermsparent, file = paste0(file, "TableS4.csv"))
+write.csv(x = gotermsparent, file = paste0(file, "DataS2.csv"))
 
 # plotting parent enriched terms
 set.seed(029510)

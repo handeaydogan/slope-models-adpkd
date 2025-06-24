@@ -528,7 +528,7 @@ ggsave(paste0(file,"Figure2.png"), width = 17, height = 17 , units = "in", dpi =
 library(sjPlot)
 proteome.model = lm(before~SERPINF1+GPX3+AFM+FERMT3+CFHR1+RARRES2, data = model.slopes.new)
 
-# TableS11
+# TableS6
 table3 = tab_model(proteome.model, dv.labels = c("Proteome Model"))
 
 proteome.ext.model = lm(before~SERPINF1+GPX3+AFM+FERMT3+CFHR1+RARRES2+age+gender+eGFR+mayo, 
@@ -577,7 +577,7 @@ proteome.ext.model114 = lm(before~SERPINF1+GPX3+AFM+FERMT3+CFHR1+RARRES2+age+gen
 combGenmodel114 = lm(before~SERPINF1+GPX3+AFM+FERMT3+CFHR1+RARRES2+age+gender+eGFR+mayo+selectedmut, 
                    data = model.slopes.new[obs114,])
 
-# TableS12
+# TableS7
 tab_model(proteome.model114,clinmodel114,clinmodel1143, 
           proteome.ext.model114, combGenmodel114,
           dv.labels = c("Proteome Model", "Clinical Model", 
@@ -587,7 +587,7 @@ tab_model(proteome.model114,clinmodel114,clinmodel1143,
                           "CFHR1", "RARRES2", "Age", "Sex [Male]", "eGFR", 
                           "MAYO [Mid]", "MAYO [More]", "PKD1 [NT]", "PKD1 [T]"))
 
-# TableS14
+# TableS9
 tab_model(selected.model.min, dv.labels = c("Proteome4 Model"))
 
 # | # Heatmaps ----
@@ -670,7 +670,7 @@ cst3cordn = model.slopes.new
 cst3cordn2 = cbind.data.frame(cst3cordn, "CST3" = data.before.tolv["P01034", rownames(cst3cordn)])
 corCST3 = cor(cst3cordn2[c(selected_fs[-7], "CST3", "eGFR", "before")], 
               use = "complete.obs") # max 0.39568677 - SERPINF1
-write.csv(corCST3, file = paste0(file,"TableS15.csv"))
+write.csv(corCST3, file = paste0(file,"TableS10.csv"))
 
 #all 29 markers - cor with before and eGFR
 allcompcor = cbind.data.frame(cst3cordn, hm.slopes[rownames(cst3cordn),])
@@ -683,7 +683,7 @@ p_all <- allcompcorSC$P
 cortabsSC = data.frame("corGFR" = cor_all[,"eGFR"], "pGFR" = p_all[,"eGFR"],
                        "sigstarGFR" = sigstar(p_all[,"eGFR"]))
 cortabsSC
-write.csv(cortabsSC, file = paste0(file,"TableS9.csv"))
+write.csv(cortabsSC, file = paste0(file,"TableS4.csv"))
 
 # | # | # Enrichment of Proteins ----
 # | # | # | # 29 Proteins against all detected proteins ----
@@ -771,13 +771,13 @@ hm_gonew = gost(query = hm_ensgID_unique, organism = "hsapiens",
                 user_threshold = 0.1, correction_method = "fdr", evcodes = T)
 hm_gonew.res = as.data.frame(hm_gonew$result)
 hm_gonew.res = apply(hm_gonew.res,2,as.character) # 15 16
-write.csv(x = hm_gonew.res, file = paste0(file, "TableS5.csv"))
+write.csv(x = hm_gonew.res, file = paste0(file, "DataS3.csv"))
 
 hm_gonew.res.sim = getrrvgo(hm_gonew)
 sort(table(hm_gonew.res.sim$reducedTerms$parentTerm),decreasing = T)  # 3
 hm_gtp = unique(cbind.data.frame(hm_gonew.res.sim$reducedTerms$parent, 
                                  hm_gonew.res.sim$reducedTerms$parentTerm))
-# write.csv(x = hm_gtp, file = paste0(file, "parent_enriched_GOBP_TableS5.csv"))
+# write.csv(x = hm_gtp, file = paste0(file, "parent_enriched_GOBP_DataS3.csv"))
 
 # | # | # | # 3 cluster of 29 Proteins against all detected proteins ----
 # clustered proteins - enrichment
@@ -809,7 +809,7 @@ enrichmentClusters = do.call(rbind.data.frame, lapply(names(finalclsprGO), funct
   return(y)}))
 enrichmentClusters = as.data.frame(enrichmentClusters)
 enrichmentClusters = apply(enrichmentClusters,2,as.character)
-write.csv(x = enrichmentClusters, file = paste0(file, "TableS6.csv"))
+write.csv(x = enrichmentClusters, file = paste0(file, "DataS4.csv"))
 # 217  17
 
 # getting the parent enriched GO:BP terms
@@ -820,7 +820,7 @@ lapply(enrichmentClusters.sim, function(x) sort(table(x$reducedTerms$parentTerm)
 hmclust_gtp = lapply(enrichmentClusters.sim, function(x){
   unique(cbind.data.frame(x$reducedTerms$parent,x$reducedTerms$parentTerm))})
 hmclust_gtp = do.call(rbind.data.frame, hmclust_gtp)
-write.csv(x = hmclust_gtp, file = paste0(file, "TableS7.csv"))
+write.csv(x = hmclust_gtp, file = paste0(file, "DataS5.csv"))
 
 # | # | # Enrichment of Samples ----
 clusteredRowsData = do.call(rbind.data.frame, lapply(names(clustrows), function(x){
@@ -858,10 +858,10 @@ agesuppp <- clusteredRowsData %>%
   t_test(merged_age ~ cluster, p.adjust.method = "bonferroni")
 
 library(xlsx)
-write.xlsx(supplTable1, file = paste0(file,"TableS8.xlsx"), sheetName = "sTable1")
-write.xlsx(egfrsupp, file = paste0(file,"TableS8.xlsx"), sheetName = "egfrsupp", append = TRUE)
-write.xlsx(slopesupp, file = paste0(file,"TableS8.xlsx"), sheetName = "slopesupp", append = TRUE)
-write.xlsx(agesuppp, file = paste0(file,"TableS8.xlsx"), sheetName = "agesuppp", append = TRUE)
+write.xlsx(supplTable1, file = paste0(file,"TableS3.xlsx"), sheetName = "sTable1")
+write.xlsx(egfrsupp, file = paste0(file,"TableS3.xlsx"), sheetName = "egfrsupp", append = TRUE)
+write.xlsx(slopesupp, file = paste0(file,"TableS3.xlsx"), sheetName = "slopesupp", append = TRUE)
+write.xlsx(agesuppp, file = paste0(file,"TableS3.xlsx"), sheetName = "agesuppp", append = TRUE)
 
 divrows = model.matrix(~0+clusteredRowsData$cluster)
 propTestGender = lapply(colnames(divrows), function(x) {
@@ -888,7 +888,7 @@ gendersupppdf = do.call(rbind.data.frame, lapply(names(gendersuppp),function(x){
   cbind.data.frame("name" = c(as.character(gsub(".*\\$","",x)), "whole cohort"),
                    "props" = rownames(gendersuppp[[x]]),gendersuppp[[x]])}))
 rownames(gendersupppdf) = NULL
-write.xlsx(gendersupppdf, file = paste0(file,"TableS8.xlsx"), 
+write.xlsx(gendersupppdf, file = paste0(file,"TableS3.xlsx"), 
            sheetName = "gendersuppp", append = TRUE)
 
 # | # Table1 and TableS2 preparation ----
@@ -965,7 +965,7 @@ writeLines(capture.output(sessionInfo()), paste0(file,"sessionInfo_screening",
 library(sjPlot)
 model.slopes$CST3 = as.numeric(data.before.tolv["P01034",rownames(model.slopes)])
 
-# TableS16
+# TableS11
 tab_model(lm(before~SERPINF1+GPX3+AFM+FERMT3+CFHR1+RARRES2, model.slopes),
           lm(before~SERPINF1+GPX3+AFM+FERMT3+CST3+RARRES2, model.slopes),
           lm(before~CST3+GPX3+AFM+FERMT3+CFHR1+RARRES2, model.slopes),

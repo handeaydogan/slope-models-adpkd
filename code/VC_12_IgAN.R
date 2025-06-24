@@ -137,7 +137,7 @@ allcompcorIGAN = data.frame("corGFR" = cor_all_igan[,"eGFR"],
                             "pGFR" = p_all_igan[,"eGFR"],
                             "sigstarGFR" = sigstar(p_all_igan[,"eGFR"]))
 allcompcorIGAN
-write.csv(allcompcorIGAN, file = "~/Data/slope-models-adpkd/data/results/TableS10.csv")
+write.csv(allcompcorIGAN, file = "~/Data/slope-models-adpkd/data/results/TableS5.csv")
 
 # Characteristics of IgAN Cohort ----
 library(dplyr)
