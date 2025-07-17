@@ -69,15 +69,19 @@ After sourcing, following
 
 - tables are not saved, but can be found in the viewer
 
-  - Table S11, S12, S14, S16, and
+  - Table S6, S7, S9, S11, and
 
 - figures and tables are saved in /data/results folder:
 
-  - Table 2, S5, S6, S7, S8, S9, S15
+  - Table 2, S3, S4, S10
 
   - Figure 1, 2, S5
 
   - Figure S10 (from ~/Data/slope-models-adpkd/code/SC/SC_05_prots.R)
+
+  - Data S3, S4, S5
+
+
 
 Then, quit
 
@@ -102,7 +106,7 @@ After sourcing, following
 
   - Table 1, Table S2 (as Table1.xlsx)
 
-  - Table S13 (as “patientsizeValidation” and “sampsizeValidation” txt
+  - Table S8 (as “patientsizeValidation” and “sampsizeValidation” txt
     files)
 
   - Figure 3, S6, S7, S8
@@ -153,7 +157,7 @@ folder
 
 - Figure S4
 
-- Table S10
+- Table S5
 
 Then, quit
 
@@ -171,9 +175,9 @@ will generate figures and tables.
 source("~/Data/slope-models-adpkd/code/SC_20_enrichmentGraph.R", echo = FALSE)
 ```
 
-After sourcing, following figures and tables are saved in /data/results
+After sourcing, following figures and data are saved in /data/results
 folder
 
 - Figure S2, S3
 
-- Table S3, S4
+- Data S1, S2
